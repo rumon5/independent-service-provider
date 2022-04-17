@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Header = () => {
+    const user = useParams(auth);
+
     return (
         <nav className='bg-gray-900 py-5 text-center sm:block md:flex justify-between items-center px-6'>
             <div>
@@ -12,7 +15,11 @@ const Header = () => {
                 <Link className='mr-3 block md:inline  text-white' to='/services'>Services</Link>
                 <Link className='mr-3 block md:inline  text-white' to='/blogs'>Blogs</Link>
                 <Link className='mr-3 block md:inline  text-white' to='/about'>About</Link>
-                <Link className='mr-3 block md:inline  text-white' to='/login'>LogIn</Link>
+                {
+                    user?.uid ? <button className='mr-3 block md:inline  text-white'>LogOut</button>
+                        :
+                        <Link className='mr-3 block md:inline  text-white' to='/login'>LogIn</Link>
+                }
             </div>
             <div className='hidden md:flex justify-between items-center'>
                 <img className='rounded-full w-8' src={"elon.png"} alt="" />
