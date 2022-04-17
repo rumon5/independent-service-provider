@@ -1,27 +1,21 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import googleIcon from '../../images/Google.svg';
 import facebookIcon from '../../images/Facebook.svg';
 import githubIcon from '../../images/GitHub.svg';
 
 
 const LogIn = () => {
+    let navigate = useNavigate();
+    let location = useLocation();
     const [
-        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-
-
-
-    let navigate = useNavigate();
-    let location = useLocation();
-    // let auth = auth;
+    ] = useSignInWithEmailAndPassword(auth);
 
     let from = location.state?.from?.pathname || "/";
 
@@ -32,7 +26,8 @@ const LogIn = () => {
         console.log(email);
         console.log(password);
 
-        createUserWithEmailAndPassword(email, password);
+        signInWithEmailAndPassword(email, password)
+
     }
 
     return (

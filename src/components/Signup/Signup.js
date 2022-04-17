@@ -3,12 +3,27 @@ import googleIcon from '../../images/Google.svg';
 import facebookIcon from '../../images/Facebook.svg';
 import githubIcon from '../../images/GitHub.svg';
 import { Link } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Signup = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
 
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 
     const handleSignUpEvent = event => {
         event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        console.log(email);
+        console.log(password);
+
+        createUserWithEmailAndPassword(email, password);
 
     }
     return (
