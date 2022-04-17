@@ -23,7 +23,7 @@ const Header = () => {
                 <Link className='mr-3 block md:inline  text-white' to='/blogs'>Blogs</Link>
                 <Link className='mr-3 block md:inline  text-white' to='/about'>About</Link>
                 {
-                    user?.uid ? <button className='mr-3   text-white' onClick={logOutEvent}>LogOut</button>
+                    user?.uid ? <button className='mr-3 text-white' onClick={logOutEvent}>LogOut</button>
                         :
                         <Link className='mr-3 block md:inline  text-white' to='/login'>LogIn</Link>
                 }

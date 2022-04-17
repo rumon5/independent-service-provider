@@ -1,0 +1,169 @@
+:root {
+    --u: 1vmin
+}
+
+.loader-container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    background: radial-gradient(circle at 50% 100%, #2e3440, #000);
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-between;
+}
+
+.loader {
+    width: calc(var(--u) * 40);
+    height: calc(var(--u) * 40);
+    position: relative;
+    animation: spin 8s linear 0s infinite;
+}
+
+.ball {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-top: calc(var(--u) * -12);
+    margin-left: calc(var(--u) * -12);
+    border-radius: 100%;
+    transform: rotate(45deg);
+}
+
+.ball:nth-child(2) {
+    margin-top: calc(var(--u) * 12);
+    transform: rotate(-90deg);
+}
+
+.ball:nth-child(3) {
+    margin-top: calc(var(--u) * 12);
+    margin-left: calc(var(--u) * 12);
+    transform: rotate(135deg);
+}
+
+.ball:nth-child(4) {
+    margin-left: calc(var(--u) * 12);
+    transform: rotate(0deg);
+}
+
+
+
+
+.ball:before {
+    --ball: #ffc107;
+    /*yellow*/
+    --ball2: #ff9800;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: spin 2s linear 0s infinite;
+    background:
+        radial-gradient(circle at 92% 50%, var(--ball) calc(var(--u) * 3), #0000 calc(var(--u) * 3.25)),
+        radial-gradient(circle at 92% 49%, var(--ball) calc(var(--u) * 2.5), #0000 calc(var(--u) * 3.125)),
+        radial-gradient(circle at 8% 50%, var(--ball2) calc(var(--u) * 3), #0000 calc(var(--u) * 3.25)),
+        radial-gradient(circle at 8% 51%, var(--ball2) calc(var(--u) * 2.5), #0000 calc(var(--u) * 3.125));
+}
+
+.ball:nth-child(2):before {
+    --ball: #448aff;
+    /*blue*/
+    --ball2: #1565c0;
+}
+
+.ball:nth-child(3):before {
+    --ball: #f44336;
+    /*red*/
+    --ball2: #ad1457;
+}
+
+.ball:nth-child(4):before {
+    --ball: #8bc34a;
+    /*green*/
+    --ball2: #009688;
+}
+
+.mirror {
+    transform: rotate(180deg);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: hue-rotate(180deg);
+}
+
+.two {
+    transform: rotate(90deg);
+    filter: hue-rotate(90deg);
+}
+
+.three {
+    transform: rotate(270deg);
+    filter: hue-rotate(270deg);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+
+/*** PORTRAIT ***/
+
+@media only screen and (orientation: portrait) {
+    body {
+        flex-direction: row;
+    }
+}
+
+/*** fix simetry ***/
+.loader:nth-child(2) .mirror .ball:before {
+    animation-duration: 2.1s;
+}
+
+.loader:nth-child(3) .mirror .ball:before {
+    animation-duration: 2.2s;
+}
+
+.loader:nth-child(3) .mirror .ball:before {
+    animation-duration: 2.3s;
+}
+
+
+
+/*** links ***/
+.more {
+    position: absolute;
+    bottom: 1em;
+    text-align: center;
+    width: 100vw;
+}
+
+.more a,
+.more span {
+    font-family: Arial, Helvetica, serif;
+    color: #fff8;
+    background: #0008;
+    padding: 0.5em;
+    font-size: calc(var(--u) * 2.5);
+    width: calc(var(--u) * 4);
+    height: calc(var(--u) * 4);
+    border-radius: 100%;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    line-height: calc(var(--u) * 4);
+}
+
+.more span,
+.more a:hover {
+    color: #000c;
+    background: #fff8;
+}

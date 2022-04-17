@@ -2,6 +2,7 @@ import React from 'react';
 import bannerImage from '../../images/elon.jpg';
 import './Home.css';
 import Services from '../Services/Services';
+import Footer from '../Footer/Footer';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
                 </div>
             </div>
             <Services></Services>
+            <Footer></Footer>
         </>
     );
 
