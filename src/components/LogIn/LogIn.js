@@ -1,8 +1,19 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import auth from '../../firebase.init';
+import auth from '../../firebase.init';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+
 
 const LogIn = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+
+
     let navigate = useNavigate();
     let location = useLocation();
     // let auth = auth;
@@ -15,6 +26,8 @@ const LogIn = () => {
         const password = event.target.password.value;
         console.log(email);
         console.log(password);
+
+        createUserWithEmailAndPassword(email, password);
     }
 
     return (
