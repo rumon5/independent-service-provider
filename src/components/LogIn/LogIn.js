@@ -5,23 +5,22 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import googleIcon from '../../images/Google.svg';
 import facebookIcon from '../../images/Facebook.svg';
 import githubIcon from '../../images/GitHub.svg';
-import { signInWithPopup } from 'firebase/auth';
 
 
 const LogIn = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    // let auth = useAuth();
 
     const from = location.state?.from?.pathname || "/";
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 
+    // Log in with email and password
     const handleLogInEvent = event => {
         event.preventDefault();
         const email = event.target.email.value;
@@ -35,11 +34,10 @@ const LogIn = () => {
         navigate(from, { replace: true });
     }
 
+    // Handle sign in with google 
     const handleSignInWithGoogle = () => {
         signInWithGoogle();
     }
-
-
 
     return (
         <div className='bg-slate-100 w-[400px] mx-auto mt-5 py-6 px-8 rounded-md h-[500px]'>
@@ -55,7 +53,7 @@ const LogIn = () => {
                 </div>
             </form>
             <div>
-                <span>New to there?</span> <Link className='text-red-400' to='/signup'>Sign UP</Link>
+                <span>New to here?</span> <Link className='text-red-400' to='/signup'>Sign Up</Link>
             </div>
             <div>
 
