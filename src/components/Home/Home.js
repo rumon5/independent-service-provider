@@ -1,7 +1,7 @@
 import React from 'react';
 import bannerImage from '../../images/elon.jpg';
 import './Home.css';
-import Services from './Services/Services';
+import Services from '../Services/Services';
 
 const Home = () => {
     return (

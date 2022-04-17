@@ -15,7 +15,7 @@ const Header = () => {
                 <Link className='mr-3 block md:inline  text-white' to='/login'>LogIn</Link>
             </div>
             <div className='hidden md:flex justify-between items-center'>
-                <img className='rounded-full w-10s' src={"elon.png"} alt="" />
+                <img className='rounded-full w-8' src={"elon.png"} alt="" />
             </div>
         </nav>
     );
