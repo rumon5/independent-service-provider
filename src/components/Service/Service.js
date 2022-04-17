@@ -18,6 +18,7 @@ const Service = ({ product }) => {
 
             <h2 className='text-2xl mt-2'>{title}</h2>
             <p className='text-xl my-2'>Price: ${price}</p>
+            <p>{body.slice(0, 70)}...</p>
             <button className='see-details-button' onClick={handleDetailsNavigate} >
                 <span>See details</span>
                 <ArrowRightIcon className='icon'></ArrowRightIcon>

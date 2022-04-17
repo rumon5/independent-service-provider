@@ -1,5 +1,6 @@
 .see-details-button {
-    color: blue;
+    color: #073246;
+    font-weight: 900;
     display: flex;
     justify-content: center;
     align-items: center;
