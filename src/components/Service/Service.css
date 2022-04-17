@@ -1,0 +1,11 @@
+.see-details-button {
+    color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.see-details-button .icon {
+    width: 25px;
+    margin-left: 5px;
+}

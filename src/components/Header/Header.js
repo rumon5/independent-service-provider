@@ -9,7 +9,8 @@ const Header = () => {
             </div>
             <div className='block md:flex'>
                 <Link className='mr-3 block md:inline  text-white' to='/home'>Home</Link>
-                <Link className='mr-3 block md:inline  text-white' to='/home'>services</Link>
+                <Link className='mr-3 block md:inline  text-white' to='/services'>Services</Link>
+                <Link className='mr-3 block md:inline  text-white' to='/blogs'>Blogs</Link>
                 <Link className='mr-3 block md:inline  text-white' to='/about'>About</Link>
                 <Link className='mr-3 block md:inline  text-white' to='/login'>LogIn</Link>
             </div>

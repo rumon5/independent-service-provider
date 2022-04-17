@@ -14,21 +14,6 @@
     transform: translate(-50%, -50%);
 }
 
-/* 
-.elon-info {
-    padding: 15px;
-    border-radius: 15px;
-    text-align: left;
-    position: absolute;
-    top: 54%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-}
-
-.elon-info:hover {
-    background-color: #1b1b1b;
-} */
-
 @media only screen and (max-width: 550px) {
     .elon-title {
         margin-left: 10px;
