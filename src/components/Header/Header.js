@@ -12,7 +12,6 @@ const Header = () => {
                 <Link className='mr-3 block md:inline  text-white' to='/home'>services</Link>
                 <Link className='mr-3 block md:inline  text-white' to='/about'>About</Link>
                 <Link className='mr-3 block md:inline  text-white' to='/login'>LogIn</Link>
-                <Link className='mr-3 block md:inline  text-white' to='signup'>SignUp</Link>
             </div>
             <div className='hidden md:flex justify-between items-center'>
                 <img className='rounded-full w-10s' src={"elon.png"} alt="" />
