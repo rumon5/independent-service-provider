@@ -135,35 +135,3 @@
 .loader:nth-child(3) .mirror .ball:before {
     animation-duration: 2.3s;
 }
-
-
-
-/*** links ***/
-.more {
-    position: absolute;
-    bottom: 1em;
-    text-align: center;
-    width: 100vw;
-}
-
-.more a,
-.more span {
-    font-family: Arial, Helvetica, serif;
-    color: #fff8;
-    background: #0008;
-    padding: 0.5em;
-    font-size: calc(var(--u) * 2.5);
-    width: calc(var(--u) * 4);
-    height: calc(var(--u) * 4);
-    border-radius: 100%;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-    line-height: calc(var(--u) * 4);
-}
-
-.more span,
-.more a:hover {
-    color: #000c;
-    background: #fff8;
-}

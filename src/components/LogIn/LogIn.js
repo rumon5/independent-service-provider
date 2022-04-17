@@ -36,7 +36,7 @@ const LogIn = () => {
     }
 
     const handleSignInWithGoogle = () => {
-        signInWithPopup(auth, signInWithGoogle)
+        signInWithGoogle();
     }
 
 

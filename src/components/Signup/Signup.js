@@ -26,6 +26,10 @@ const Signup = () => {
         createUserWithEmailAndPassword(email, password);
 
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle();
+    }
     return (
         <div className='bg-slate-100 w-[400px] mx-auto mt-5 py-6 px-8 rounded-md h-[500px]'>
             <form onSubmit={handleSignUpEvent}>
@@ -47,7 +51,7 @@ const Signup = () => {
             </div>
             <div>
 
-                <button className='flex justify-center items-center py-3 px-2 h-14 my-2 w-full  rounded-md border-2 border-solid border-blue-400 bg-white' >
+                <button onClick={handleGoogleSignIn} className='flex justify-center items-center py-3 px-2 h-14 my-2 w-full  rounded-md border-2 border-solid border-blue-400 bg-white' >
                     <img className='w-8 mr-2' src={googleIcon} alt="" />
                     Sign In With Google</button>
             </div>
