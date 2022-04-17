@@ -10,11 +10,13 @@ import Signup from './components/Signup/Signup';
 import NotFound from './components/NotFound/NotFound';
 import Blog from './components/Blog/Blog';
 import About from './components/About/About';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div>
       <Header></Header>
+      <Toaster />
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
