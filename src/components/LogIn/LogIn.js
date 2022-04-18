@@ -32,17 +32,10 @@ const LogIn = () => {
     const [signInWithGithub, githubUser, githubLoading] = useSignInWithGithub(auth);
 
     useEffect(() => {
-        if (user) {
+        if (user || googleUser || facebookUser || githubUser) {
             navigate(from, { replace: true });
         }
     }, [user, googleUser, githubUser, facebookUser]);
-
-    useEffect(() => {
-        if (user || googleUser || facebookUser || githubUser) {
-            navigate('/');
-            toast.success('Sing up successfully', { id: 'sign-up' });
-        }
-    }, [googleUser, facebookUser, githubUser]);
 
     if (loading || googleLoading || facebookLoading || githubLoading) {
         return <Loading></Loading>

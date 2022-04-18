@@ -49,7 +49,6 @@ const Signup = () => {
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName });
     }
-    console.log(user, googleUser)
 
     // Handle google sign in event
     const handleGoogleSignIn = () => {
