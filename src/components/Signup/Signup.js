@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import googleIcon from '../../images/Google.svg';
 import facebookIcon from '../../images/Facebook.svg';
 import githubIcon from '../../images/GitHub.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Loading/Loading';
-import { updateProfile } from 'firebase/auth';
+import toast from 'react-hot-toast';
+
 
 const Signup = () => {
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
-        error,
+
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-
-
+    const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        if (googleUser || user) {
+            return navigate('/')
+        }
+    }, [user, googleUser])
+
 
     if (loading) {
         return <Loading></Loading>;
@@ -29,16 +37,18 @@ const Signup = () => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
-        const name = event.target.name.value;
+        const displayName = event.target.name.value;
+        const confirmPassword = event.target.confirmPassword.value;
 
-        console.log(email);
-        console.log(password);
-
+        if (password !== confirmPassword) {
+            return toast.error('Password did not match', { id: 'wrong-password' });
+        }
         await createUserWithEmailAndPassword(email, password);
-        await updateProfile({ displayName: name });
-        navigate('/')
-    }
+        await updateProfile({ displayName });
+        toast.success('Sing up successfully', { id: 'sign-up' });
 
+    }
+    console.log(user, googleUser)
     // Handle google sign in event
     const handleGoogleSignIn = () => {
         signInWithGoogle();
@@ -72,7 +82,7 @@ const Signup = () => {
                 <div>
                     <input
                         className='py-3 outline-none border-2 border-solid h-14 border-blue-400 px-2 my-2 w-full rounded-md' type="password"
-                        name="confirm-password" required
+                        name="confirmPassword" required
                         id="confirm-password"
                         placeholder='Confirm Password' />
                 </div>

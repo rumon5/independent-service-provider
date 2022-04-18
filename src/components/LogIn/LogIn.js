@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import googleIcon from '../../images/Google.svg';
 import facebookIcon from '../../images/Facebook.svg';
 import githubIcon from '../../images/GitHub.svg';
 import toast from 'react-hot-toast';
 import Loading from '../Loading/Loading';
+import { async } from '@firebase/util';
+
 
 
 
@@ -15,23 +17,33 @@ const LogIn = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
-    const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
 
     const from = location.state?.from?.pathname || "/";
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser, googleLoading] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithFacebook, facebookUser, facebookLoading] = useSignInWithFacebook(auth);
+
+    const [signInWithGithub, githubUser, githubLoading] = useSignInWithGithub(auth);
+
     useEffect(() => {
-        if (user || googleUser) {
+        if (user) {
             navigate(from, { replace: true });
         }
-    }, [user, googleUser])
+    }, [user, googleUser]);
 
-    if (loading || googleLoading) {
+    useEffect(() => {
+        if (googleUser || facebookUser || githubUser) {
+            navigate('/');
+        }
+    }, [googleUser, facebookUser, githubUser]);
+
+    if (loading || googleLoading || facebookLoading || githubLoading) {
         return <Loading></Loading>
     }
 
@@ -45,23 +57,33 @@ const LogIn = () => {
     }
 
     // Log in with email and password
-    const handleLogInEvent = event => {
+    const handleLogInEvent = async event => {
         event.preventDefault();
 
-        signInWithEmailAndPassword(email, password);
+        await signInWithEmailAndPassword(email, password);
 
         if (error?.code === 'auth/user-not-found') {
             toast.error('User not found', { id: 'notfound' });
         }
 
         if (error?.code === 'auth/wrong-password') {
-            toast.error('Please enter a valid password', { id: 'invalid-password' })
+            toast.error('Please enter the valid password', { id: 'invalid-password' })
         }
     }
 
     // Handle sign in with google 
     const handleSignInWithGoogle = () => {
         signInWithGoogle();
+    }
+
+    // Handle sign in with facebook
+    const handleSignWithFacebook = () => {
+        signInWithFacebook();
+    }
+
+    // handle sign in with github
+    const handleSignInWithGithub = () => {
+        signInWithGithub();
     }
 
     return (
@@ -111,6 +133,7 @@ const LogIn = () => {
             <div>
 
                 <button
+                    onClick={handleSignWithFacebook}
                     className='flex justify-center items-center py-3 px-2 h-14 my-2 w-full  rounded-md border-2 border-solid border-blue-400 bg-white' >
                     <img className='w-8 mr-2' src={facebookIcon} alt="" />
                     Sign In With Facebook</button>
@@ -118,6 +141,7 @@ const LogIn = () => {
             <div>
 
                 <button
+                    onClick={handleSignInWithGithub}
                     className='flex justify-center items-center py-3 px-2 h-14 my-2 w-full  rounded-md border-2 border-solid border-blue-400 bg-white' >
                     <img className='w-8 mr-2' src={githubIcon} alt="" />
                     Sign In With Github</button>
