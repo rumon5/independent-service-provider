@@ -3,14 +3,13 @@ import googleIcon from '../../images/Google.svg';
 import facebookIcon from '../../images/Facebook.svg';
 import githubIcon from '../../images/GitHub.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Loading/Loading';
 import toast from 'react-hot-toast';
 
-
 const Signup = () => {
-    const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser, googleLoading] = useSignInWithGoogle(auth);
     const [
         createUserWithEmailAndPassword,
         user,
@@ -18,18 +17,22 @@ const Signup = () => {
 
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile] = useUpdateProfile(auth);
+    const [signInWithFacebook, facebookUser, facebookLoading] = useSignInWithFacebook(auth);
+
+    const [signInWithGithub, githubUser, githubLoading] = useSignInWithGithub(auth);
+
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        if (googleUser || user) {
-            return navigate('/')
+        if (googleUser || user || facebookUser || githubUser) {
+            toast.success('Sing up successfully', { id: 'sign-up' });
+            return navigate('/');
         }
-    }, [user, googleUser])
+    }, [user, googleUser, githubUser, facebookUser])
 
 
-    if (loading) {
-        return <Loading></Loading>;
+    if (loading || googleLoading || facebookLoading || githubLoading) {
+        return <Loading></Loading>
     }
 
     // Create user with email and password
@@ -45,13 +48,24 @@ const Signup = () => {
         }
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName });
-        toast.success('Sing up successfully', { id: 'sign-up' });
+        // toast.success('Sing up successfully', { id: 'sign-up' });
 
     }
     console.log(user, googleUser)
+
     // Handle google sign in event
     const handleGoogleSignIn = () => {
         signInWithGoogle();
+    }
+
+    // Handle sign in with facebook
+    const handleSignWithFacebook = () => {
+        signInWithFacebook();
+    }
+
+    // handle sign in with github
+    const handleSignInWithGithub = () => {
+        signInWithGithub();
     }
 
 
@@ -106,6 +120,7 @@ const Signup = () => {
             <div>
 
                 <button
+                    onClick={handleSignWithFacebook}
                     className='flex justify-center items-center py-3 px-2 h-14 my-2 w-full  rounded-md border-2 border-solid border-blue-400 bg-white' >
                     <img className='w-8 mr-2' src={facebookIcon} alt="" />
                     Sign Up With Facebook</button>
@@ -113,6 +128,7 @@ const Signup = () => {
             <div>
 
                 <button
+                    onClick={handleSignInWithGithub}
                     className='flex justify-center items-center py-3 px-2 h-14 my-2 w-full  rounded-md border-2 border-solid border-blue-400 bg-white' >
                     <img className='w-8 mr-2' src={githubIcon} alt="" />
                     Sign Up With Github</button>
