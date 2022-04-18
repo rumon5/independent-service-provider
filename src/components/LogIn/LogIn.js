@@ -33,7 +33,7 @@ const LogIn = () => {
 
     useEffect(() => {
         if (user || googleUser || facebookUser || githubUser) {
-            toast.success('Sing up successfully', { id: 'sign-in' });
+            toast.success('Sing in successfully', { id: 'sign-in' });
             navigate(from, { replace: true });
         }
     }, [user, googleUser, githubUser, facebookUser]);
