@@ -22,7 +22,7 @@ const CheckOut = () => {
     const { title, img, price, body } = product;
 
     return (
-        <div className='bg-slate-100 p-4 rounded-md'>
+        <div className='bg-slate-100 p-4 max-w-[550px] mx-auto mt-4 rounded-md'>
             <img className='min-w-full rounded-xl' src={img} alt="" />
 
             <h2 className='text-2xl mt-2'>{title}</h2>

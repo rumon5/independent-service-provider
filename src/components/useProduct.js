@@ -7,7 +7,7 @@ const useProduct = () => {
             id: 1,
             img: 'https://i.ibb.co/b6DcLrz/25-HP-Solar-Panels-D.png',
             title: 'Tesla 25 HP Solar Panel D',
-            body: 'Our solar panels are low-profile and durable — quietly converting sunlight to energy for decades to come. Integrated hardware and simple design achieve this by securing the panels close to your roof and to each other for a minimalist aesthetic',
+            body: 'Our solar panels are low-profile and durable — quietly converting sunlight to energy for decades to come. Integrated hardware and simple design achieve this by securing the panels close to your roof and to each other for a minimalist aesthetic.',
             price: 10000,
         },
         {

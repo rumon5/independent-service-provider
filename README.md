@@ -13,7 +13,7 @@ Live link [Elon Musk](https://github.com/facebook/create-react-app).
 * Services section
 * Customer Benefits section 
 * If the customer does not log in, he will not be able to buy the product and will only be able to see
-* If customer not login but click to checkout then he will redirect to login page
+* If the customer does not log in but clicks to BuyNow, he will be redirected to the login page.
 
 ### `Technologies`
 
@@ -21,5 +21,5 @@ Live link [Elon Musk](https://github.com/facebook/create-react-app).
 * React router
 * Firebase
 * React firebase hook
-* Tailwind
-* Hot toast
+* React Tailwind css
+* React Hot toast
