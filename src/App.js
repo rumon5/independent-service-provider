@@ -11,6 +11,7 @@ import NotFound from './components/NotFound/NotFound';
 import Blog from './components/Blog/Blog';
 import About from './components/About/About';
 import { Toaster } from 'react-hot-toast';
+import BuyNow from './components/BuyNow/BuyNow';
 
 function App() {
   return (
@@ -20,11 +21,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/checkout' element={
+        <Route path='/checkout/:id' element={<CheckOut></CheckOut>}></Route>
+        <Route path='/buynow' element={
           <RequireAuth>
-            <CheckOut></CheckOut>
+            <BuyNow></BuyNow>
           </RequireAuth>
-        }></Route>
+        }> </Route>
         <Route path='/services' element={<Services></Services>}></Route>
         <Route path='/login' element={<LogIn></LogIn>}></Route>
         <Route path='/signup' element={<Signup></Signup>}></Route>

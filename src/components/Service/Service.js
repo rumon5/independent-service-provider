@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 const Service = ({ product }) => {
     const navigate = useNavigate();
 
-    const { img, title, body, price } = product;
+    const { id, img, title, body, price } = product;
 
-    const handleDetailsNavigate = () => {
-        navigate('/checkout')
+    const handleDetailsNavigate = (id) => {
+        navigate(`/checkout/${id}`);
     }
     return (
         <div className='bg-slate-100 p-4 rounded-md'>
@@ -18,8 +18,8 @@ const Service = ({ product }) => {
 
             <h2 className='text-2xl mt-2'>{title}</h2>
             <p className='text-xl my-2'>Price: ${price}</p>
-            <p>{body.slice(0, 70)}...</p>
-            <button className='see-details-button' onClick={handleDetailsNavigate} >
+            <p>{body.slice(0, 100)}...</p>
+            <button className='see-details-button' onClick={() => handleDetailsNavigate(id)} >
                 <span>See details</span>
                 <ArrowRightIcon className='icon'></ArrowRightIcon>
             </button>

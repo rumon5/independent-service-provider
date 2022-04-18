@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Loading/Loading';
+import { updateProfile } from 'firebase/auth';
 
 const Signup = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
@@ -23,19 +24,19 @@ const Signup = () => {
         return <Loading></Loading>;
     }
 
-    if (user) {
-        return navigate('/')
-    }
-
     // Create user with email and password
-    const handleSignUpEvent = event => {
+    const handleSignUpEvent = async event => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
+        const name = event.target.name.value;
+
         console.log(email);
         console.log(password);
 
-        createUserWithEmailAndPassword(email, password);
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+        navigate('/')
     }
 
     // Handle google sign in event
