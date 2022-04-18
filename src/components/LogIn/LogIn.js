@@ -33,9 +33,20 @@ const LogIn = () => {
 
     useEffect(() => {
         if (user || googleUser || facebookUser || githubUser) {
+            toast.success('Sing up successfully', { id: 'sign-in' });
             navigate(from, { replace: true });
         }
     }, [user, googleUser, githubUser, facebookUser]);
+
+    useEffect(() => {
+        if (error?.code === 'auth/user-not-found') {
+            toast.error('User not found', { id: 'notfound' });
+        }
+
+        if (error?.code === 'auth/wrong-password') {
+            toast.error('Please enter the valid password', { id: 'invalid-password' })
+        }
+    }, [error])
 
     if (loading || googleLoading || facebookLoading || githubLoading) {
         return <Loading></Loading>
@@ -54,14 +65,6 @@ const LogIn = () => {
         event.preventDefault();
 
         await signInWithEmailAndPassword(email, password);
-
-        if (error?.code === 'auth/user-not-found') {
-            toast.error('User not found', { id: 'notfound' });
-        }
-
-        if (error?.code === 'auth/wrong-password') {
-            toast.error('Please enter the valid password', { id: 'invalid-password' })
-        }
     }
 
     // Handle sign in with google 
@@ -108,13 +111,13 @@ const LogIn = () => {
                         className='text-red-500'
                         onClick={async () => {
                             await sendPasswordResetEmail(email);
-                            email && toast.success('Sent email');
+                            email && toast.success('Email sent', { id: 'email-sent' });
                         }}>
                         Reset password</button>
                 </div>
             </form>
             <div>
-                <span>New to here?</span> <Link className='text-green-400 text-[18px]' to='/signup'>SignUp</Link>
+                <span>New to here?</span> <Link className='text-blue-600 text-[17px]' to='/signup'>Sign Up</Link>
             </div>
             <div>
 
