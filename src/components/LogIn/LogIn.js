@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
@@ -6,6 +6,7 @@ import googleIcon from '../../images/Google.svg';
 import facebookIcon from '../../images/Facebook.svg';
 import githubIcon from '../../images/GitHub.svg';
 import toast from 'react-hot-toast';
+import Loading from '../Loading/Loading';
 
 
 
@@ -24,10 +25,19 @@ const LogIn = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    useEffect(() => {
+        if (user || googleUser) {
+            navigate(from, { replace: true });
+        }
+    }, [user, googleUser])
+
+    if (loading || googleLoading) {
+        return <Loading></Loading>
+    }
+
 
     const handleEmailEvent = (event) => {
         setEmail(event.target.value);
-        console.log(event.target.value);
     }
 
     const handlePasswordEvent = event => {
@@ -39,10 +49,14 @@ const LogIn = () => {
         event.preventDefault();
 
         signInWithEmailAndPassword(email, password);
-    }
 
-    if (user || googleUser) {
-        navigate(from, { replace: true });
+        if (error?.code === 'auth/user-not-found') {
+            toast.error('User not found', { id: 'notfound' });
+        }
+
+        if (error?.code === 'auth/wrong-password') {
+            toast.error('Please enter a valid password', { id: 'invalid-password' })
+        }
     }
 
     // Handle sign in with google 

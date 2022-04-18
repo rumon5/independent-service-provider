@@ -3,6 +3,7 @@ import bannerImage from '../../images/elon.jpg';
 import './Home.css';
 import Services from '../Services/Services';
 import Footer from '../Footer/Footer';
+import Benefits from '../Benefits/Benefits';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
                 </div>
             </div>
             <Services></Services>
+            <Benefits></Benefits>
             <Footer></Footer>
         </>
     );

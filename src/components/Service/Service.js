@@ -1,6 +1,6 @@
 import React from 'react';
 import './Service.css';
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
 
 
