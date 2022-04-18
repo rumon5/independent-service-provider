@@ -2,7 +2,6 @@ import React from 'react';
 import Service from '../Service/Service';
 import useProduct from '../useProduct';
 
-
 const Services = () => {
     const services = useProduct([]);
     return (
