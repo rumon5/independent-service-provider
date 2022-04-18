@@ -35,18 +35,18 @@ const LogIn = () => {
         if (user) {
             navigate(from, { replace: true });
         }
-    }, [user, googleUser]);
+    }, [user, googleUser, githubUser, facebookUser]);
 
     useEffect(() => {
-        if (googleUser || facebookUser || githubUser) {
+        if (user || googleUser || facebookUser || githubUser) {
             navigate('/');
+            toast.success('Sing up successfully', { id: 'sign-up' });
         }
     }, [googleUser, facebookUser, githubUser]);
 
     if (loading || googleLoading || facebookLoading || githubLoading) {
         return <Loading></Loading>
     }
-
 
     const handleEmailEvent = (event) => {
         setEmail(event.target.value);
@@ -112,15 +112,16 @@ const LogIn = () => {
                 </div>
                 <div>
                     <button
+                        className='text-red-500'
                         onClick={async () => {
-                            await sendPasswordResetEmail(email)
-                            toast.success('Sent email')
+                            await sendPasswordResetEmail(email);
+                            email && toast.success('Sent email');
                         }}>
                         Reset password</button>
                 </div>
             </form>
             <div>
-                <span>New to here?</span> <Link className='text-red-400' to='/signup'>Sign Up</Link>
+                <span>New to here?</span> <Link className='text-green-400 text-[18px]' to='/signup'>SignUp</Link>
             </div>
             <div>
 

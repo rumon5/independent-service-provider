@@ -48,8 +48,6 @@ const Signup = () => {
         }
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName });
-        // toast.success('Sing up successfully', { id: 'sign-up' });
-
     }
     console.log(user, googleUser)
 
@@ -107,7 +105,7 @@ const Signup = () => {
                 </div>
             </form>
             <div>
-                <span>Already have an account?</span> <Link className='text-red-600 ' to='/login'>Log In</Link>
+                <span>Already have an account?</span> <Link className='text-green-400 ' to='/login'>LogIn</Link>
             </div>
             <div>
 
