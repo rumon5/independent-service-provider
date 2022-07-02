@@ -1,5 +1,4 @@
 
-
 const useProduct = () => {
 
     const services = [
@@ -23,6 +22,13 @@ const useProduct = () => {
             title: 'Cyberquad for Kids',
             body: 'Get ready for any adventure with the all-electric Cyberquad for Kids. Inspired by our iconic Cybertruck design, the four-wheel ATV features a full steel frame, cushioned seat and adjustable suspension with rear disk braking and LED light bars. Powered by a lithium-ion battery with up to 15 miles of range and a configurable top speed of 10 mph, Cyberquad for Kids is suitable for anyone 8-years old and up.',
             price: 1900,
+        },
+        {
+            id: 4,
+            img: 'https://i.ibb.co/RzTWcFM/1714748-00-A-0-2000.png',
+            title: 'Cyberquad max pro for Kids',
+            body: 'Get ready for any adventure with the all-electric Cyberquad for Kids. Inspired by our iconic Cybertruck design, the four-wheel ATV features a full steel frame, cushioned seat and adjustable suspension with rear disk braking and LED light bars. Powered by a lithium-ion battery with up to 15 miles of range and a configurable top speed of 10 mph, Cyberquad for Kids is suitable for anyone 8-years old and up.',
+            price: 1400,
         }
     ];
 
